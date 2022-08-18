@@ -66,7 +66,7 @@ export class MidiSysexComponent implements OnInit, OnChanges, OnDestroy {
    * Allow changing MIDI channel
    */
   @Input()
-  AutoLoadPrograms: boolean
+  AutoLoadPrograms: boolean = true
   autoLoadPrograms: boolean = this.AutoLoadPrograms
 
   /**
@@ -80,7 +80,7 @@ export class MidiSysexComponent implements OnInit, OnChanges, OnDestroy {
    * Set whether this widget is disabled or not
    */
   @Input()
-  Disabled: boolean
+  Disabled: boolean = false
   disabled: boolean = this.Disabled
 
 

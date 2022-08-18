@@ -149,7 +149,7 @@ export class MidiccControlComponent implements OnInit, OnChanges, OnDestroy {
    * User radio group for pre-defined values instead of dropdown
    */
   @Input()
-  styleRadioPredefinedValues: boolean
+  styleRadioPredefinedValues: boolean = null
   radioPredefinedValues = this.styleRadioPredefinedValues
 
   /**
@@ -160,7 +160,7 @@ export class MidiccControlComponent implements OnInit, OnChanges, OnDestroy {
 
 
   @Input()
-  MIDIPredefinedValues: MidiPredefinedValue[]
+  MIDIPredefinedValues: MidiPredefinedValue[] = null
   midiPredefinedValues = this.MIDIPredefinedValues
 
 
@@ -168,7 +168,7 @@ export class MidiccControlComponent implements OnInit, OnChanges, OnDestroy {
    * Set whether this widget is disabled or not
    */
   @Input()
-  Disabled: boolean
+  Disabled: boolean = false
   disabled: boolean = this.Disabled
 
   /**
@@ -193,11 +193,11 @@ export class MidiccControlComponent implements OnInit, OnChanges, OnDestroy {
    * Automation curve on how the way is between the min and max value
    */
   @Input()
-  MIDIAutoCurve: MidiControlAutoCurve // not supported yet
+  MIDIAutoCurve: MidiControlAutoCurve = null // not supported yet
   autoCurve: MidiControlAutoCurve = this.MIDIAutoCurve
 
   @Input()
-  MIDIAutoLabel: string
+  MIDIAutoLabel: string = 'Automation'
   autoLabel: string = this.MIDIAutoLabel || 'Automation'
 
   autoLoop: {
@@ -215,7 +215,7 @@ export class MidiccControlComponent implements OnInit, OnChanges, OnDestroy {
    * Only when not 'inline'
    */
   @Input()
-  ShowDragHandle: boolean
+  ShowDragHandle: boolean = false
   showDragHandle: boolean = this.ShowDragHandle
 
   //
@@ -522,7 +522,7 @@ export class MidiccControlComponent implements OnInit, OnChanges, OnDestroy {
 
   onChangeMidiChannel(event) {
     /**
-     * keep in mind that when this is bound on `(onNgModelChange)` 
+     * keep in mind that when this is bound on `(onNgModelChange)`
      * it will fired for `(input)` and `(change)` events
      */
     this.MIDIChannelChange.emit(this.midiChannel)
@@ -629,7 +629,7 @@ export class MidiccControlComponent implements OnInit, OnChanges, OnDestroy {
 
 
 export interface MidiControlChangeEvent {
-  /** 
+  /**
    * the name of the model type.
    * e.g. Amp, Cab, Effect
    */

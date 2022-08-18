@@ -70,7 +70,7 @@ export class MidiccModelsComponent implements OnInit, OnChanges {
    * Set whether this widget is disabled or not
    */
   @Input()
-  Disabled: boolean
+  Disabled: boolean = false
   disabled: boolean = this.Disabled
 
 
@@ -281,7 +281,7 @@ export class Constants {
 }
 
 export interface MidiControlChangeEvent {
-  /** 
+  /**
    * the name of the model type.
    * e.g. Amp, Cab, Effect
    */

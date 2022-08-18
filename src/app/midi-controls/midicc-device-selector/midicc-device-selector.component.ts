@@ -43,7 +43,7 @@ export class MidiccDeviceSelectorComponent implements OnInit, OnChanges {
    * Hidden
    */
   @Input()
-  Hidden: boolean
+  Hidden: boolean = false
   hidden: boolean = this.Hidden
 
 
@@ -55,7 +55,7 @@ export class MidiccDeviceSelectorComponent implements OnInit, OnChanges {
    * Set whether this widget is disabled or not
    */
   @Input()
-  Disabled: boolean
+  Disabled: boolean = false
   disabled: boolean = this.Disabled
 
   /**
@@ -64,6 +64,14 @@ export class MidiccDeviceSelectorComponent implements OnInit, OnChanges {
   appSettings_nativeSelectForTouchDevice
 
   constructor(private webMidiService: WebMidiService, private webMidiApiService: WebMidiApiService) { }
+
+  hasValidInputDevice(skipExistenceCheck: Boolean = false) {
+    return (skipExistenceCheck || this.inputDevice) && this.inputDevice.name.toUpperCase().startsWith(this.defaultInputDeviceName.toUpperCase())
+  }
+
+  hasValidOutputDevice(skipExistenceCheck: Boolean = false) {
+    return (skipExistenceCheck || this.outputDevice) && this.outputDevice.name.toUpperCase().startsWith(this.defaultOutputDeviceName.toUpperCase())
+  }
 
   ngOnInit() {
     this.subInit = this.webMidiService.initWebMIDI().subscribe((webMidiApi: WebMidi) => {

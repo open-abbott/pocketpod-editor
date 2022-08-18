@@ -24,7 +24,7 @@ export class ControlCardComponent implements OnInit, OnChanges {
   Note: string
 
   @Input()
-  ShowDragHandle: boolean
+  ShowDragHandle: boolean = false
   showDragHandle: boolean = this.ShowDragHandle
 
   header

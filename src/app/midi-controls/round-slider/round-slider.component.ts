@@ -47,15 +47,15 @@ export class RoundSliderComponent implements OnInit, AfterViewInit, OnChanges, C
   /** -- END value accessor -- */
 
   @Input()
-  Disabled: boolean
+  Disabled: boolean = false
   disabled = this.Disabled
 
   @Input()
-  Value: number
+  Value: number = null
   value: number = this.Value
 
   @Input()
-  Animation: boolean
+  Animation: boolean = false
   animation: boolean = this.Animation
 
   @ViewChild('slider', { static: true })

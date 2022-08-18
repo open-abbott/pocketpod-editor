@@ -78,7 +78,7 @@ export class MidiccProgramComponent implements OnInit, OnChanges, OnDestroy {
    * Displays the icon only and sets the label as tooltip.
    */
   @Input()
-  styleIconOnly: string
+  styleIconOnly: string = null
   iconOnly: string = this.styleIconOnly
 
   /**
@@ -104,7 +104,7 @@ export class MidiccProgramComponent implements OnInit, OnChanges, OnDestroy {
    * Set whether this widget is disabled or not
    */
   @Input()
-  Disabled: boolean
+  Disabled: boolean = false
   disabled: boolean = this.Disabled
 
   constructor(private webMidiApiService: WebMidiApiService, private ngZone: NgZone) { }
@@ -222,14 +222,18 @@ export class MidiccProgramComponent implements OnInit, OnChanges, OnDestroy {
     this.MIDIProgramChange.emit({ program: this.midiProgramNumber })
   }
 
-  onChangeProgramUp(event) {
+  onChangeProgramDown(event) {
     const tmp = this.midiProgramNumber + 1
+    console.log(`Attempting to go to program ${tmp} of ${this.programsMax}`)
     this.midiProgramNumber = tmp <= this.programsMax ? tmp : this.programsMin
+    console.log(`Actual program number ${this.midiProgramNumber}`)
+    console.log(`MIDI channel ${this.midiChannel}`)
     this.sendMidiProgrammChange(event, this.midiProgramNumber, this.midiChannel)
   }
 
-  onChangeProgramDown(event) {
+  onChangeProgramUp(event) {
     const tmp = this.midiProgramNumber - 1
+    console.log(`Attempting to go to program ${tmp} of ${this.programsMax}`)
     this.midiProgramNumber = tmp >= this.programsMin ? tmp : this.programsMax
     this.sendMidiProgrammChange(event, this.midiProgramNumber, this.midiChannel)
   }
@@ -262,9 +266,9 @@ export class MidiccProgramComponent implements OnInit, OnChanges, OnDestroy {
     /**
      * Bank change requires sending a MIDI message for MSB (Most Significant Bit) and LSB (Least Significant Bit) each.<br/>
      * MSB has the CC `00` while LSB has the CC `32`
-     * 
+     *
      * Example:
-     * 
+     *
      * Bank A 000 000
      * Bank B 000 001
      * Bank C 000 002
@@ -275,11 +279,11 @@ export class MidiccProgramComponent implements OnInit, OnChanges, OnDestroy {
      * Bank G(1) 121 001
      * Bank G(2) 121 002
      * Bank G(3) 121 003
-     * 
+     *
      * Then selecting Bank D should send 2 MIDI messages:
      * CC 00 "000"
      * CC 32 "003"
-     * 
+     *
      * See also: https://www.sweetwater.com/sweetcare/articles/6-what-msb-lsb-refer-for-changing-banks-andprograms/
      */
     // TODO not implemented yet
